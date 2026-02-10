@@ -1,0 +1,116 @@
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Для Сайкал ❤️</title>
+
+<style>
+body{
+  margin:0;
+  height:100vh;
+  background:linear-gradient(135deg,#ffe6f0,#ffd6e7,#ffc1da);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-family:Arial;
+  overflow:hidden;
+}
+
+/* кнопка */
+.envelope{
+  padding:60px 90px;
+  border-radius:30px;
+  background:white;
+  cursor:pointer;
+  box-shadow:0 0 40px rgba(255,105,180,.35);
+  transition:.3s;
+  z-index:5;
+}
+
+.envelope:hover{
+  transform:scale(1.1);
+}
+
+h1{
+  margin:0;
+  color:#c2185b;
+}
+
+/* экран открытки */
+#card{
+  position:fixed;
+  inset:0;
+  background:black;
+  display:none;
+  justify-content:center;
+  align-items:center;
+  animation: fade .8s ease;
+}
+
+#card img{
+  max-width:100%;
+  max-height:100%;
+  object-fit:contain;
+}
+
+/* сердечки */
+.heart{
+  position:absolute;
+  animation: floatUp 6s linear infinite;
+}
+
+@keyframes floatUp{
+  0%{transform:translateY(0);opacity:1}
+  100%{transform:translateY(-800px);opacity:0}
+}
+
+@keyframes fade{
+  from{opacity:0}
+  to{opacity:1}
+}
+</style>
+</head>
+
+<body>
+
+<!-- кнопка -->
+<div class="envelope" onclick="openCard()">
+  <h1>💌 Saya push me</h1>
+</div>
+
+<!-- музыка -->
+<audio id="music" loop>
+  <source src="Kirkorov.mp3" type="audio/mpeg">
+</audio>
+
+<!-- твоя открытка -->
+<div id="card">
+  <img src="card.jpg">
+</div>
+
+<script>
+function openCard(){
+
+  // скрываем кнопку
+  document.querySelector('.envelope').style.display="none";
+
+  // показываем открытку
+  document.getElementById('card').style.display="flex";
+
+  // запускаем музыку
+  document.getElementById('music').play();
+
+  // сердечки
+  setInterval(()=>{
+    const h=document.createElement("div");
+    h.className="heart";
+    h.innerHTML="❤️";
+    h.style.left=Math.random()*window.innerWidth+"px";
+    h.style.fontSize=(18+Math.random()*35)+"px";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),6000);
+  },300);
+}
+</script>
+
+</body>
+</html>
